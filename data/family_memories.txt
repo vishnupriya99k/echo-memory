@@ -1,0 +1,10 @@
+-The user is Komalavalli a women
+- User's children: Vijaya (daughter), Anil (son), Aji (daughter), Ani (daughter).
+- Vijaya's children: Bilahari (son), Haripriya (daughter).
+- Anil's children: Niru (son), Nimi (daughter).
+-Aji's children: Krishnapriya(daughter), Anoop(son)
+-Ani's children: sivapriya(daughter),vishnupriya(daughter)
+- Haripriya loves biriyani.
+-sivapriya is married to Praveen
+-Krishnapriya is married to Gopu
+-Vishnupriya is abroad

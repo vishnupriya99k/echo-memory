@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "label": "Blood pressure tablet",
+    "type": "medication",
+    "time": "09:00",
+    "days": "daily",
+    "notes": "Take with water",
+    "created": "2026-09-02T11:07:33.242827",
+    "completed_dates": [
+      "2026-09-02"
+    ]
+  },
+  {
+    "id": 2,
+    "label": "Drink water",
+    "type": "task",
+    "time": "10:00",
+    "days": "daily",
+    "notes": "",
+    "created": "2026-09-02T11:07:33.260423",
+    "completed_dates": [
+      "2026-09-02"
+    ]
+  }
+]

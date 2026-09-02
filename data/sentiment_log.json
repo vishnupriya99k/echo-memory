@@ -1,0 +1,119 @@
+[
+  {
+    "session_date": "2026-09-02",
+    "session_time": "10:58:07",
+    "summary": {
+      "total": 7,
+      "moods": {
+        "confused": 2,
+        "lonely": 1,
+        "happy": 2,
+        "distressed": 2
+      },
+      "dominant_mood": "confused",
+      "distress_count": 2
+    },
+    "entries": [
+      {
+        "timestamp": "2026-09-02 10:58:07",
+        "mood": "confused",
+        "emoji": "😕",
+        "message_snippet": "Who is Haripriya's mother?"
+      },
+      {
+        "timestamp": "2026-09-02 10:58:07",
+        "mood": "lonely",
+        "emoji": "🥺",
+        "message_snippet": "I miss my daughter so much"
+      },
+      {
+        "timestamp": "2026-09-02 10:58:07",
+        "mood": "happy",
+        "emoji": "😊",
+        "message_snippet": "Thank you, that makes me happy!"
+      },
+      {
+        "timestamp": "2026-09-02 10:58:07",
+        "mood": "distressed",
+        "emoji": "😟",
+        "message_snippet": "I don't know where I am, I'm scared"
+      },
+      {
+        "timestamp": "2026-09-02 10:58:07",
+        "mood": "confused",
+        "emoji": "😕",
+        "message_snippet": "Tell me again who Vijaya is"
+      },
+      {
+        "timestamp": "2026-09-02 10:58:07",
+        "mood": "distressed",
+        "emoji": "😟",
+        "message_snippet": "Where is everyone? I feel so alone"
+      },
+      {
+        "timestamp": "2026-09-02 10:58:07",
+        "mood": "happy",
+        "emoji": "😊",
+        "message_snippet": "That's wonderful, I'm so proud"
+      }
+    ]
+  },
+  {
+    "session_date": "2026-09-02",
+    "session_time": "11:00:36",
+    "summary": {
+      "total": 7,
+      "moods": {
+        "confused": 4,
+        "lonely": 2,
+        "distressed": 1
+      },
+      "dominant_mood": "confused",
+      "distress_count": 1
+    },
+    "entries": [
+      {
+        "timestamp": "2026-09-02 10:59:20",
+        "mood": "confused",
+        "emoji": "😕",
+        "message_snippet": "Who is Haripriya's mother?"
+      },
+      {
+        "timestamp": "2026-09-02 10:59:45",
+        "mood": "lonely",
+        "emoji": "🥺",
+        "message_snippet": "I miss my daughter Vijaya so much"
+      },
+      {
+        "timestamp": "2026-09-02 10:59:50",
+        "mood": "confused",
+        "emoji": "😕",
+        "message_snippet": "Who is married to Praveen?"
+      },
+      {
+        "timestamp": "2026-09-02 10:59:53",
+        "mood": "confused",
+        "emoji": "😕",
+        "message_snippet": "Who is Haripriya's mother?"
+      },
+      {
+        "timestamp": "2026-09-02 11:00:12",
+        "mood": "distressed",
+        "emoji": "😟",
+        "message_snippet": "I don't know where I am, I'm scared"
+      },
+      {
+        "timestamp": "2026-09-02 11:00:18",
+        "mood": "confused",
+        "emoji": "😕",
+        "message_snippet": "Who are my grandchildren?"
+      },
+      {
+        "timestamp": "2026-09-02 11:00:32",
+        "mood": "lonely",
+        "emoji": "🥺",
+        "message_snippet": "Tell me about my family"
+      }
+    ]
+  }
+]
