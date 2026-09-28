@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
+<title>EchoMemory Companion</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌸</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Fraunces:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+
+</head>
+<body>
+
+<div class="drawer-overlay" id="drawerOverlay"></div>
+
+<div class="modal-backdrop" id="reminderModalBackdrop" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Reminders">
+    <div class="modal-header">
+      <div class="modal-tabs">
+        <button class="modal-tab active" id="tabView" data-tab="view">Today's Reminders</button>
+        <button class="modal-tab" id="tabAdd" data-tab="add">Add Reminder</button>
+      </div>
+      <button class="icon-btn modal-close" id="closeReminderModal" aria-label="Close">✕</button>
+    </div>
+
+    <div class="modal-body" id="modalViewBody">
+      <ul class="reminder-list" id="reminderList"></ul>
+    </div>
+
+    <div class="modal-body" id="modalAddBody" hidden>
+      <div class="quick-reminders">
+        <p class="quick-label">Quick add</p>
+        <div class="quick-btns">
+          <button class="quick-btn" data-label="Breakfast" data-type="task" data-time="08:00">🍳 Breakfast</button>
+          <button class="quick-btn" data-label="Lunch" data-type="task" data-time="13:00">🥗 Lunch</button>
+          <button class="quick-btn" data-label="Dinner" data-type="task" data-time="19:00">🍽️ Dinner</button>
+          <button class="quick-btn" data-label="Drink Water" data-type="task" data-time="09:00" data-notes="Stay hydrated">💧 Water (9am)</button>
+          <button class="quick-btn" data-label="Drink Water" data-type="task" data-time="13:00" data-notes="Stay hydrated">💧 Water (1pm)</button>
+          <button class="quick-btn" data-label="Drink Water" data-type="task" data-time="18:00" data-notes="Stay hydrated">💧 Water (6pm)</button>
+        </div>
+      </div>
+      <form class="reminder-form" id="reminderForm">
+        <label>What is it?
+          <input type="text" id="rLabel" placeholder="e.g. Blood pressure tablet" required>
+        </label>
+        <label>Type
+          <select id="rType">
+            <option value="medication">💊 Medication</option>
+            <option value="task">🔔 Task</option>
+            <option value="appointment">📅 Appointment</option>
+          </select>
+        </label>
+        <label>Time
+          <input type="time" id="rTime" required>
+        </label>
+        <label>Notes (optional)
+          <input type="text" id="rNotes" placeholder="e.g. Take with water">
+        </label>
+        <div class="form-row">
+          <button type="submit" class="btn btn-primary">Save Reminder</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="photoModalBackdrop" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Add Family Photo">
+    <div class="modal-header">
+      <span class="modal-title">Add a Family Photo</span>
+      <button class="icon-btn modal-close" id="closePhotoModal" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="photo-form">
+        <label>Person's name
+          <input type="text" id="photoName" placeholder="e.g. Grandmother Vijaya">
+        </label>
+        <label>Choose photo
+          <input type="file" id="photoFile" accept="image/*">
+        </label>
+        <div class="form-row">
+          <button class="btn btn-primary" id="photoSaveBtn">Save Photo</button>
+          <button class="btn btn-secondary" id="photoCancelBtn">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="app-shell">
+
+  <aside class="sidebar" id="sidebar" aria-label="Options">
+    <div class="sidebar-inner">
+
+      <div class="sidebar-header">
+        <span class="sidebar-title">EchoMemory</span>
+        <button class="icon-btn" id="closeSidebarBtn" aria-label="Close menu">✕</button>
+      </div>
+
+      <section class="side-section">
+        <button class="btn btn-secondary btn-full" id="openPhotoBtn">📷 Add Family Photo</button>
+      </section>
+
+      <section class="side-section">
+        <h3>Voice</h3>
+        <label class="toggle-row">
+          <span>Speak responses aloud</span>
+          <input type="checkbox" id="ttsToggle" checked>
+          <span class="toggle-pill" aria-hidden="true"></span>
+        </label>
+      </section>
+
+      <section class="side-section">
+        <h3>Session</h3>
+        <button class="btn btn-secondary btn-full" id="saveSessionBtn">💾 Save Today's Chat</button>
+      </section>
+
+      <p class="sidebar-footer">EchoMemory · Your memory companion</p>
+    </div>
+  </aside>
+
+  <div class="main-col">
+
+    <header class="app-header">
+      <button class="icon-btn menu-btn" id="openSidebarBtn" aria-label="Open menu">☰</button>
+      <div class="wordmark">
+        <span class="wordmark-emoji">🌸</span>
+        <span class="wordmark-text">EchoMemory</span>
+      </div>
+      <div class="header-right">
+        <div class="mood-badge" id="moodBadge">
+          <span id="moodEmoji">😌</span>
+          <span id="moodWord">Calm</span>
+        </div>
+
+        <button class="icon-btn reminder-bell-btn" id="openReminderModal" aria-label="Open reminders">
+          <span>⏰</span>
+          <span class="bell-badge" id="bellBadge" hidden>0</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="memory-statusbar" id="memoryStatusBar">
+      <span id="memoryStatus">Checking family records…</span>
+      <span class="mood-chips" id="moodChips"></span>
+    </div>
+
+    <div class="alert-strip alert-amber" id="dueAlert" hidden></div>
+
+    <div class="alert-strip alert-blush" id="caregiverAlert" hidden>
+      💛 <strong>A caregiver may want to check in.</strong>
+    </div>
+
+    <main class="chat-area" id="chatArea" aria-live="polite"></main>
+
+    <footer class="input-row">
+      <button class="btn btn-round" id="micBtn" aria-label="Speak your question">
+        <span class="btn-round-icon">🎤</span>
+        <span class="btn-round-label">Speak</span>
+      </button>
+      <input type="text" id="textInput" class="text-input" placeholder="Ask me anything about yourself…" autocomplete="off">
+      <button class="btn btn-round btn-round-primary" id="sendBtn" aria-label="Send">
+        <span class="btn-round-icon">➤</span>
+        <span class="btn-round-label">Send</span>
+      </button>
+    </footer>
+
+  </div>
+</div>
+<script src="/static/app.js"></script>
+</body>
+</html>

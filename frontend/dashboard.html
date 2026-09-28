@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EchoMemory — Caregiver Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="dash-wrap">
+  <div class="dash-header">
+    <h1>🌸 Caregiver Dashboard</h1>
+    <input type="date" id="datePicker" class="dash-date-picker">
+  </div>
+
+  <div class="dash-card">
+    <h2>Mood Today</h2>
+    <div id="moodBox"><span class="dash-empty">Loading…</span></div>
+  </div>
+
+  <div class="dash-card">
+    <h2>⚠️ Things to check</h2>
+    <div id="notesBox"><span class="dash-empty">Loading…</span></div>
+  </div>
+
+  <div class="dash-card">
+    <h2>🧠 Unverified facts the AI picked up</h2>
+    <p style="margin-top:-6px;color:var(--ink-soft);font-size:0.9rem;">
+      These were mentioned in conversation but aren't in the family records yet.
+      Confirm the true ones so the AI can state them normally; reject anything incorrect.
+    </p>
+    <div id="factsBox"><span class="dash-empty">Loading…</span></div>
+  </div>
+
+  <div class="dash-card">
+    <h2>💬 Conversation</h2>
+    <div id="chatBox"><span class="dash-empty">Loading…</span></div>
+  </div>
+</div>
+
+<script src="/static/dashboard.js"></script>
+</body>
+</html>
