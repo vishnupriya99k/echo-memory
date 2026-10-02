@@ -5,6 +5,8 @@ api.py — REST API for EchoMemory Companion
 import os
 import sys
 import secrets
+import io
+import logging
 from pathlib import Path
 
 from fastapi import FastAPI, UploadFile, Form, HTTPException, Depends
@@ -13,15 +15,19 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from pydantic import BaseModel
+from PIL import Image, ImageOps
+import bcrypt
 
 sys.path.append(str(Path(__file__).parent.parent))
 from backend.brain import EchoBrain
 import backend.db as db
 
+logger = logging.getLogger("echomemory")
+
 ROOT = Path(__file__).parent.parent
 FRONTEND_DIR = ROOT / "frontend"
 PHOTOS_DIR = ROOT / "data" / "photos"
-PHOTOS_DIR.mkdir(parents=True, exist_ok=True)  # must exist before StaticFiles mounts it below
+PHOTOS_DIR.mkdir(parents=True, exist_ok=True) 
 
 app = FastAPI(title="EchoMemory API")
 
@@ -32,15 +38,27 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-#  Caregiver auth  
+#  Caregiver auth (protects /dashboard and /api/caregiver/*) 
 security = HTTPBasic()
 CAREGIVER_USER = os.getenv("CAREGIVER_USER", "caregiver")
-CAREGIVER_PASS = os.getenv("CAREGIVER_PASS", "changeme")
+CAREGIVER_PASS_HASH = os.getenv("CAREGIVER_PASS_HASH")
+
+if not CAREGIVER_PASS_HASH:
+   
+    CAREGIVER_PASS_HASH = bcrypt.hashpw(b"changeme", bcrypt.gensalt()).decode()
+    logger.warning(
+        "CAREGIVER_PASS_HASH not set in .env — falling back to the default password "
+        "'changeme'. Generate a real one with: python backend/generate_password_hash.py"
+    )
 
 
 def require_caregiver(credentials: HTTPBasicCredentials = Depends(security)):
     valid_user = secrets.compare_digest(credentials.username, CAREGIVER_USER)
-    valid_pass = secrets.compare_digest(credentials.password, CAREGIVER_PASS)
+    try:
+        valid_pass = bcrypt.checkpw(credentials.password.encode("utf-8"), CAREGIVER_PASS_HASH.encode("utf-8"))
+    except ValueError:
+        logger.error("CAREGIVER_PASS_HASH in .env is not a valid bcrypt hash — regenerate it with generate_password_hash.py")
+        valid_pass = False
     if not (valid_user and valid_pass):
         raise HTTPException(
             status_code=401,
@@ -48,7 +66,6 @@ def require_caregiver(credentials: HTTPBasicCredentials = Depends(security)):
             headers={"WWW-Authenticate": "Basic"},
         )
     return credentials.username
-
 #  Shared brain instance 
 echo = EchoBrain()
 memory_loaded = False

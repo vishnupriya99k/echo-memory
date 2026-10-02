@@ -5,3 +5,5 @@ python-multipart
 langchain-google-genai
 langchain-core
 python-dotenv
+Pillow
+bcrypt

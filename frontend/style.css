@@ -674,3 +674,14 @@ button { cursor: pointer; }
   box-shadow: var(--shadow);
   display: block;
 }
+.sidebar-footer-link {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-radius: var(--radius-md);
+}
+.sidebar-footer-link:hover { background: var(--peach-soft); color: var(--ink); }
